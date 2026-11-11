@@ -1,14 +1,17 @@
 <?php
-
+ 
 namespace App\Http\Controllers\Admin;
-
+ 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-
+use App\Models\Buku;
+ 
 class BukuController extends Controller
 {
     public function index()
     {
-        return view('admin.data-buku');
+        // Ambil semua buku beserta kategorinya, urut berdasarkan judul
+        $buku = Buku::with('kategori')->orderBy('judul')->get();
+ 
+        return view('admin.data-buku', compact('buku'));
     }
 }
